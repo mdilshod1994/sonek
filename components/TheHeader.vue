@@ -22,11 +22,11 @@
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
-  top: 28px;
+  top: clamp(1.5rem, 0.884rem + 0.72vw, 1.75rem);
   z-index: 1;
   &__logo {
-    width: 128px;
-    height: 128px;
+    width: clamp(6rem, 1.069rem + 5.78vw, 8rem);
+    height: clamp(6rem, 1.069rem + 5.78vw, 8rem);
     flex-shrink: 0;
     img {
       width: 100%;
@@ -36,7 +36,7 @@
   &__wrap {
     display: flex;
     align-items: center;
-    gap: 92px;
+    gap: clamp(3.5rem, -2.048rem + 6.5vw, 5.75rem);
     padding: 0 120px;
   }
   &__menu {
