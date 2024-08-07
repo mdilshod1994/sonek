@@ -60,7 +60,7 @@
     <div cls="section-four">
       <img src="@/assets/imgs/s-4-1.png" alt="" cls="section-four__img" />
     </div>
-    <div cls="section-five">here will be some animation</div>
+    <div cls="section-five">Coin</div>
     <div cls="section-six">
       <div cls="section-six__btns">
         <div cls="section-six__btn -tg">
@@ -96,8 +96,12 @@
           X (Twitter)
         </div>
       </div>
-      <div cls="section-six__text">© Sonek 2024. All rights reserved.</div>
-      <img src="@/assets/imgs/s-6-1.png" cls="section-six__img" alt="" />
+      <div cls="section-six__text">
+        © Sonek 2024. <br />
+        All rights reserved.
+      </div>
+      <img src="@/assets/imgs/s-6-1.png" cls="section-six__img -desk" alt="" />
+      <img src="@/assets/imgs/s-6-1-mob.png" cls="section-six__img -mob" alt="" />
     </div>
   </div>
 </template>
@@ -127,14 +131,23 @@
   text-transform: uppercase;
   width: max-content;
   cursor: pointer;
+  transition: 0.3s ease-in-out;
   &.-blue {
     background: #1a3a97;
+    &:hover {
+      background: #1a2683;
+    }
   }
   &.-red {
     background: #ed1e16;
+    &:hover {
+      background: #c50000;
+    }
   }
 }
 .home {
+  overflow-x: hidden;
+  width: 100%;
   img {
     user-select: none;
     -webkit-user-drag: none;
@@ -350,6 +363,9 @@
     bottom: 0;
     right: 0;
     max-width: clamp(64.7rem, -4.186rem + 80.69vw, 92.638rem);
+    &.-mob {
+      display: none;
+    }
   }
   &__btns {
     display: flex;
@@ -374,16 +390,23 @@
     line-height: 140%;
     letter-spacing: clamp(-0.043rem, 0.001rem + -0.05vw, -0.06rem);
     cursor: pointer;
+    transition: 0.3s ease-in-out;
     text-transform: uppercase;
     &.-tg {
-      background: #2aa5ea;
+      background: linear-gradient(273deg, #2aa5ea 3.91%, #1882cf 93.04%);
+      &:hover {
+        background: linear-gradient(273deg, #2aa5ea 3.91%, #046ebb 93.04%);
+      }
       svg {
         width: 70px;
         height: 60px;
       }
     }
     &.-tw {
-      background: #262626;
+      background: linear-gradient(273deg, #262626 3.91%, #181818 93.04%);
+      &:hover {
+        background: linear-gradient(273deg, #262626 3.91%, #040404 93.04%);
+      }
       svg {
         width: 63px;
         height: 60px;
@@ -402,6 +425,244 @@
     margin-left: clamp(0rem, -8.322rem + 9.75vw, 3.375rem);
     position: relative;
     z-index: 1;
+    br {
+      display: none;
+    }
+  }
+}
+@media (max-width: 1366px) {
+  .section-first {
+    &__img {
+      bottom: 0;
+      max-width: clamp(26.563rem, -16.48rem + 67.25vw, 40.938rem);
+      width: clamp(26.563rem, -16.48rem + 67.25vw, 40.938rem);
+    }
+    &__content {
+      max-width: 50%;
+      margin-top: 0;
+    }
+  }
+  .container {
+    padding: 0 60px;
+  }
+  .section-scnd {
+    height: 182px;
+    margin-top: -45px;
+    &__wrap {
+      height: 95px;
+      span {
+        font-size: 44.214px;
+        line-height: 105%;
+        letter-spacing: -0.884px;
+      }
+    }
+  }
+  .section-three {
+    margin-top: -135px;
+    height: clamp(40.313rem, 4.663rem + 55.7vw, 52.219rem);
+    &__circle {
+      width: clamp(41.875rem, 1.828rem + 62.57vw, 55.25rem);
+    }
+    &__coin {
+      &.-first,
+      &.-scnd,
+      &.-three {
+        max-width: 150px;
+      }
+    }
+    &__content {
+      height: clamp(29.375rem, 19.27rem + 15.79vw, 32.75rem);
+      padding-top: 0;
+      align-items: center;
+      max-width: calc(100% - 120px);
+      &-img {
+        &.-sonek {
+          max-width: clamp(29.063rem, 7.168rem + 34.21vw, 36.375rem);
+        }
+        &.-sign {
+          bottom: -50px;
+          max-width: 244px;
+          right: 35px;
+        }
+        &.-coin {
+          display: none;
+        }
+      }
+      &-wrap {
+        gap: clamp(1.5rem, -1.494rem + 4.68vw, 2.5rem);
+        max-width: clamp(23.75rem, -0.39rem + 37.72vw, 31.813rem);
+      }
+      &-title {
+        font-size: clamp(1.625rem, -0.246rem + 2.92vw, 2.25rem);
+        font-style: normal;
+        font-weight: 500;
+        line-height: normal;
+        letter-spacing: -1.04px;
+      }
+    }
+  }
+  .section-four {
+    height: clamp(36.5rem, -0.178rem + 57.31vw, 48.75rem);
+    &__img {
+      top: 50%;
+      transform: translateY(-50%);
+      left: 60px;
+      max-width: clamp(15.625rem, -8.141rem + 37.13vw, 23.563rem);
+    }
+  }
+  .section-six {
+    padding: 52px 0 0 52px;
+    height: clamp(36.5rem, -0.178rem + 57.31vw, 48.75rem);
+    padding: clamp(3.75rem, -14.963rem + 29.24vw, 10rem) 0 32px
+      clamp(3.75rem, -7.478rem + 17.54vw, 7.5rem);
+    &__img {
+      max-width: clamp(46.563rem, -7.744rem + 84.85vw, 64.7rem);
+    }
+  }
+}
+@media (max-width: 1024px) {
+  .container {
+    padding: 0 24px;
+    width: auto;
+  }
+  .section-first {
+    flex-direction: column;
+    height: max-content;
+    padding-top: 181px;
+    gap: 44px;
+    &__img {
+      position: relative;
+      align-self: flex-end;
+    }
+    &__content {
+      width: auto;
+      max-width: 100%;
+    }
+    &__title {
+      font-size: 26px;
+      line-height: normal;
+      letter-spacing: -1.04px;
+    }
+  }
+  .btn {
+    font-size: 14px;
+    line-height: 140%;
+    letter-spacing: -0.42px;
+    height: 44px;
+  }
+  .section-three {
+    padding: 99px 0 125px;
+    height: auto;
+    &__circle {
+      display: none;
+    }
+    &__coin {
+      &.-first {
+        right: -20px;
+        top: 155px;
+      }
+      &.-scnd {
+        right: auto;
+        left: -35px;
+      }
+      &.-first,
+      &.-scnd {
+        max-width: 220px;
+      }
+      &.-three {
+        display: none;
+      }
+    }
+    &__content {
+      height: auto;
+      padding: 40px 32px 0;
+      flex-direction: column-reverse;
+      max-width: calc(100% - 48px);
+      border-radius: 32px;
+      gap: 52px;
+      &-wrap {
+        max-width: 100%;
+      }
+      &-btn {
+        width: 100%;
+      }
+      &-img {
+        &.-sonek {
+          position: relative;
+          max-width: 383px;
+        }
+        &.-sign {
+          right: auto;
+          left: 50%;
+          transform: translateX(-50%);
+          max-width: 279.483px;
+        }
+      }
+    }
+  }
+  .section-four {
+    height: 1071px;
+    background: url("@/assets/imgs/s-4-bg-mob.png");
+    background-position: center bottom;
+    background-size: cover;
+    background-repeat: no-repeat;
+    &__img {
+      top: 73px;
+      left: 50%;
+      transform: translateY(0) translateX(-50%);
+    }
+  }
+  .section-six {
+    height: 611px;
+    padding: 58px 24px 24px;
+    &__img {
+      width: 362px;
+      height: 366px;
+      flex-shrink: 0;
+      &.-desk {
+        display: none;
+      }
+      &.-mob {
+        display: block;
+      }
+    }
+    &__text {
+      font-size: 12px;
+      line-height: 140%;
+      letter-spacing: -0.24px;
+      br {
+        display: block;
+      }
+    }
+    &__btns {
+    }
+    &__btn {
+      height: 66px;
+      font-size: 25.173px;
+      line-height: 140%;
+      letter-spacing: -0.503px;
+      &.-tg {
+        gap: 24.515px;
+        svg {
+          width: 36.71px;
+          height: 31.466px;
+        }
+      }
+      &.-tw {
+        gap: 28.186px;
+        svg {
+          width: 33.039px;
+          height: 31.466px;
+        }
+      }
+    }
+  }
+}
+@media (max-width: 560px) {
+  .section-first {
+    &__img {
+      max-width: calc(100% - 33px);
+    }
   }
 }
 </style>
