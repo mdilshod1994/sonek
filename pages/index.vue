@@ -610,6 +610,7 @@
       top: 73px;
       left: 50%;
       transform: translateY(0) translateX(-50%);
+      max-width: 328.151px;
     }
   }
   .section-six {
