@@ -127,35 +127,33 @@ class App {
 
       for (let row = 0; row < this.grid.rows; row++) {
         for (let col = 0; col < this.grid.cols; col++) {
-          setTimeout(() => {
-            const mesh = this.meshes[row][col]
-            const mouseDistance = distance(
-              x,
-              z,
-              mesh.position.x + this.groupMesh.position.x,
-              mesh.position.z + this.groupMesh.position.z,
-            )
+          const mesh = this.meshes[row][col]
+          const mouseDistance = distance(
+            x,
+            z,
+            mesh.position.x + this.groupMesh.position.x,
+            mesh.position.z + this.groupMesh.position.z,
+          )
 
-            const y = map(mouseDistance, 6, 0, 0, 10)
-            TweenMax.to(mesh.position, 0.2, { y: y < 1 ? 1 : y })
+          const y = map(mouseDistance, 6, 0, 0, 10)
+          TweenMax.to(mesh.position, 0.2, { y: y < 1 ? 1 : y })
 
-            const scaleFactor = mesh.position.y / 5
-            const scale = scaleFactor < 1 ? 1 : scaleFactor
+          const scaleFactor = mesh.position.y / 5
+          const scale = scaleFactor < 1 ? 1 : scaleFactor
 
-            TweenMax.to(mesh.scale, 5, {
-              ease: Expo.easeOut,
-              x: scale,
-              y: scale,
-              z: scale,
-            })
+          TweenMax.to(mesh.scale, 5, {
+            ease: Expo.easeOut,
+            x: scale,
+            y: scale,
+            z: scale,
+          })
 
-            TweenMax.to(mesh.rotation, 3, {
-              ease: Expo.easeOut,
-              x: map(mesh.position.y, -1, 1, radians(45), mesh.initialRotation.x),
-              z: map(mesh.position.y, -1, 1, radians(-90), mesh.initialRotation.z),
-              y: map(mesh.position.y, -1, 1, radians(90), mesh.initialRotation.y),
-            })
-          }, 0.1)
+          TweenMax.to(mesh.rotation, 3, {
+            ease: Expo.easeOut,
+            x: map(mesh.position.y, -1, 1, radians(45), mesh.initialRotation.x),
+            z: map(mesh.position.y, -1, 1, radians(-90), mesh.initialRotation.z),
+            y: map(mesh.position.y, -1, 1, radians(90), mesh.initialRotation.y),
+          })
         }
       }
     }
@@ -200,7 +198,9 @@ class App {
   }
 
   animate() {
-    this.draw()
+    setTimeout(() => {
+      this.draw()
+    }, 500)
 
     this.renderer.render(this.scene, this.camera)
 
