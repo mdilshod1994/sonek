@@ -28,7 +28,7 @@
     <div cls="section-scnd">
       <div cls="section-scnd__wrap">
         <div cls="section-scnd__rect">
-          <span v-for="s in 5">
+          <span v-for="s in 5" :key="s">
             Together, we can finish the job. Let's secure our victory together
           </span>
         </div>
@@ -60,7 +60,11 @@
     <div cls="section-four">
       <img src="@/assets/imgs/s-4-1.png" alt="" cls="section-four__img" />
     </div>
-    <div cls="section-five">Coin</div>
+    <div cls="section-five">
+      <client-only>
+        <three-js-animation />
+      </client-only>
+    </div>
     <div cls="section-six">
       <div cls="section-six__btns">
         <div cls="section-six__btn -tg">
@@ -342,7 +346,9 @@
   }
 }
 .section-five {
-  height: clamp(48.75rem, 0.206rem + 56.86vw, 68.438rem);
+  // height: clamp(48.75rem, 0.206rem + 56.86vw, 68.438rem);
+
+  height: auto;
   display: flex;
   align-items: center;
   justify-content: center;
