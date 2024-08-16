@@ -82,7 +82,7 @@
           </svg>
           Telegram
         </a>
-        <a cls="section-six__btn -tw" href="x.com/SonekMeme" target="_blank">
+        <a cls="section-six__btn -tw" href="https://x.com/SonekMeme" target="_blank">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="63"
