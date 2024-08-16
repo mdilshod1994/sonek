@@ -65,9 +65,9 @@
         <three-js-animation />
       </client-only>
     </div>
-    <div cls="section-six">
+    <div id="socials" cls="section-six">
       <div cls="section-six__btns">
-        <div cls="section-six__btn -tg">
+        <a cls="section-six__btn -tg" href="https://t.me/SonekMeme" target="_blank">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="70"
@@ -81,8 +81,8 @@
             />
           </svg>
           Telegram
-        </div>
-        <div cls="section-six__btn -tw">
+        </a>
+        <a cls="section-six__btn -tw" href="x.com/SonekMeme" target="_blank">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="63"
@@ -98,7 +98,7 @@
             />
           </svg>
           X (Twitter)
-        </div>
+        </a>
       </div>
       <div cls="section-six__text">
         © Sonek 2024. <br />
@@ -347,7 +347,6 @@
 }
 .section-five {
   // height: clamp(48.75rem, 0.206rem + 56.86vw, 68.438rem);
-
   height: auto;
   display: flex;
   align-items: center;

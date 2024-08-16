@@ -6,6 +6,10 @@
 </template>
 
 <style>
+html,
+body {
+  scroll-behavior: smooth;
+}
 body {
   font-family: Montserrat;
   font-size: clamp(1rem, 0.538rem + 0.54vw, 1.188rem);

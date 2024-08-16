@@ -9,10 +9,10 @@
       <div cls="header__menu -desk">
         <nuxt-link to="#"> How to Vote </nuxt-link>
         <nuxt-link to="#"> About </nuxt-link>
-        <nuxt-link to="#"> Social </nuxt-link>
+        <nuxt-link to="#socials"> Social </nuxt-link>
       </div>
       <div cls="header__menu -mob">
-        <nuxt-link to="#">
+        <nuxt-link to="https://t.me/SonekMeme" target="_blank">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="47"
@@ -35,7 +35,7 @@
             />
           </svg>
         </nuxt-link>
-        <nuxt-link to="#">
+        <nuxt-link to="https://x.com/SonekMeme" target="_blank">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="47"

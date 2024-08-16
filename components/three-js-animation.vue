@@ -41,7 +41,7 @@ class App {
   }
 
   addAmbientLight() {
-    const light = new THREE.AmbientLight("#ffffff", 3)
+    const light = new THREE.AmbientLight("#ffffff", 5)
 
     this.scene.add(light)
   }
@@ -180,12 +180,19 @@ class App {
 
     window.addEventListener("mousemove", this.onMouseMove.bind(this), false)
 
+    window.addEventListener("touchmove", this.onTouchMove.bind(this), false)
+
     this.onMouseMove({ clientX: 0, clientY: 0 })
   }
 
   onMouseMove({ clientX, clientY }) {
     this.mouse3D.x = (clientX / this.width) * 2 - 1
     this.mouse3D.y = -(clientY / this.height) * 2 + 1
+  }
+
+  onTouchMove(e) {
+    this.mouse3D.x = (e.touches[0].clientX / this.width) * 2 - 1
+    this.mouse3D.y = -(e.touches[0].clientY / this.height) * 2 + 1
   }
 
   onResize() {
@@ -200,7 +207,7 @@ class App {
   animate() {
     setTimeout(() => {
       this.draw()
-    }, 500)
+    }, 1000)
 
     this.renderer.render(this.scene, this.camera)
 
