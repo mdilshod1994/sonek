@@ -2,15 +2,16 @@ import vueCssModule from "vite-plugin-vue-css-module"
 
 export default defineNuxtConfig({
   compatibilityDate: "2024-04-03",
-  app:{
-    head:{
-      script:[
+  ssr: false,
+  app: {
+    head: {
+      script: [
         {
-          src: '/TweenMax.1.20.3.min.js',
-          type: 'text/javascript',
+          src: "/TweenMax.1.20.3.min.js",
+          type: "text/javascript",
         },
-      ]
-    }
+      ],
+    },
   },
   modules: ["@nuxtjs/google-fonts"],
   vite: {
