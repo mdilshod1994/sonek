@@ -42,11 +42,10 @@ class App {
 
   addAmbientLight() {
     const light = new THREE.AmbientLight("#ffffff", 6)
-
     this.scene.add(light)
   }
   addDirectionalLight() {
-    const directionalLight = new THREE.DirectionalLight(0xffffff, 8)
+    const directionalLight = new THREE.DirectionalLight(0xffffff, 7)
     directionalLight.position.set(50, 100, 100)
 
     this.scene.add(directionalLight)
