@@ -46,12 +46,8 @@ class App {
     this.scene.add(light)
   }
   addDirectionalLight() {
-    const directionalLight = new THREE.DirectionalLight(0xffffff, 3)
-    directionalLight.position.set(50, 100, 50)
-    directionalLight.castShadow = true
-
-    directionalLight.shadow.mapSize.width = this.width
-    directionalLight.shadow.mapSize.height = this.height
+    const directionalLight = new THREE.DirectionalLight(0xffffff, 8)
+    directionalLight.position.set(50, 100, 100)
 
     this.scene.add(directionalLight)
   }
