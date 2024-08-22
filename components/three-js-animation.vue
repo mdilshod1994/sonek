@@ -11,8 +11,10 @@ class App {
     this.gutter = { size: 4 }
     this.meshes = []
     this.grid = { rows: 5, cols: 12 }
-    this.width = window.innerWidth
-    this.height = window.innerHeight
+    // this.width = window.innerWidth
+    // this.height = window.innerHeight
+    this.width = experience.value.offsetWidth
+    this.height = experience.value.offsetHeight
     this.mouse3D = new THREE.Vector2()
     this.raycaster = new THREE.Raycaster()
   }
@@ -20,9 +22,11 @@ class App {
   createScene() {
     this.scene = new THREE.Scene()
 
+    this.scene.background = new THREE.Color("#F1F1F1")
     this.renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true })
-    this.renderer.setSize(window.innerWidth, window.innerHeight)
-    this.renderer.setPixelRatio(window.devicePixelRatio)
+    this.renderer.setSize(experience.value.offsetWidth, experience.value.offsetHeight)
+    // this.renderer.setSize(window.innerWidth, window.innerHeight)
+    // this.renderer.setPixelRatio(window.devicePixelRatio)
 
     this.renderer.shadowMap.enabled = true
     this.renderer.shadowMap.type = THREE.PCFSoftShadowMap
@@ -33,7 +37,11 @@ class App {
   }
 
   createCamera() {
-    this.camera = new THREE.PerspectiveCamera(37, window.innerWidth / window.innerHeight, 1)
+    this.camera = new THREE.PerspectiveCamera(
+      37,
+      experience.value.offsetWidth / experience.value.offsetHeight,
+      1,
+    )
     this.camera.position.set(0, 65, 0)
     this.camera.rotation.x = -1.57
 
@@ -186,22 +194,22 @@ class App {
   }
 
   onMouseMove({ clientX, clientY }) {
-    this.mouse3D.x = (clientX / this.width) * 2 - 1
-    this.mouse3D.y = -(clientY / this.height) * 2 + 1
+    this.mouse3D.x = (clientX / experience.value.offsetWidth) * 2 - 1
+    this.mouse3D.y = -(clientY / experience.value.offsetHeight) * 2 + 1
   }
 
   onTouchMove(e) {
-    this.mouse3D.x = (e.touches[0].clientX / this.width) * 2 - 1
-    this.mouse3D.y = -(e.touches[0].clientY / this.height) * 2 + 1
+    this.mouse3D.x = (e.touches[0].clientX / experience.value.offsetWidth) * 2 - 1
+    this.mouse3D.y = -(e.touches[0].clientY / experience.value.offsetHeight) * 2 + 1
   }
 
   onResize() {
-    this.width = window.innerWidth
-    this.height = window.innerHeight
+    this.width = experience.value.offsetWidth
+    this.height = experience.value.offsetHeight
 
-    this.camera.aspect = this.width / this.height
+    this.camera.aspect = experience.value.offsetWidth / experience.value.offsetHeight
     this.camera.updateProjectionMatrix()
-    this.renderer.setSize(this.width, this.height)
+    this.renderer.setSize(experience.value.offsetWidth, experience.value.offsetHeight)
   }
 
   animate() {
@@ -229,6 +237,6 @@ onMounted(() => {
 .wrap {
   position: relative;
   width: 100%;
-  height: 100%;
+  height: 100vh;
 }
 </style>
