@@ -11,8 +11,6 @@ class App {
     this.gutter = { size: 4 }
     this.meshes = []
     this.grid = { rows: 5, cols: 12 }
-    // this.width = window.innerWidth
-    // this.height = window.innerHeight
     this.width = experience.value.offsetWidth
     this.height = experience.value.offsetHeight
     this.mouse3D = new THREE.Vector2()
@@ -22,11 +20,8 @@ class App {
   createScene() {
     this.scene = new THREE.Scene()
 
-    this.scene.background = new THREE.Color("#F1F1F1")
     this.renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true })
     this.renderer.setSize(experience.value.offsetWidth, experience.value.offsetHeight)
-    // this.renderer.setSize(window.innerWidth, window.innerHeight)
-    // this.renderer.setPixelRatio(window.devicePixelRatio)
 
     this.renderer.shadowMap.enabled = true
     this.renderer.shadowMap.type = THREE.PCFSoftShadowMap
@@ -49,13 +44,24 @@ class App {
   }
 
   addAmbientLight() {
-    const light = new THREE.AmbientLight("#ffffff", 6)
+    const light = new THREE.AmbientLight("#ffffff", 1.5)
     this.scene.add(light)
   }
   addDirectionalLight() {
-    const directionalLight = new THREE.DirectionalLight(0xffffff, 7)
-    directionalLight.position.set(50, 100, 100)
+    const directionalLight = new THREE.DirectionalLight(0xffffff, 3)
+    // directionalLight.position.set(50, 100, 100)
+    directionalLight.position.set(50, 100, 50)
+    directionalLight.castShadow = true
 
+    // Shadow settings (optional but recommended for better shadow quality)
+    directionalLight.shadow.mapSize.width = this.width
+    directionalLight.shadow.mapSize.height = this.height
+    directionalLight.shadow.camera.near = 0.5
+    directionalLight.shadow.camera.far = 500
+    directionalLight.shadow.camera.left = -100
+    directionalLight.shadow.camera.right = 100
+    directionalLight.shadow.camera.top = 100
+    directionalLight.shadow.camera.bottom = -100
     this.scene.add(directionalLight)
   }
 
@@ -230,7 +236,9 @@ onMounted(() => {
 </script>
 
 <template>
-  <div ref="experience" cls="wrap" />
+  <div ref="experience" cls="wrap">
+    <p>Mr. Sonek</p>
+  </div>
 </template>
 
 <style lang="scss" module>
@@ -238,5 +246,23 @@ onMounted(() => {
   position: relative;
   width: 100%;
   height: 100vh;
+  background: #f1f1f1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  p {
+    color: #fff;
+    font-size: clamp(4.93rem, 3.247rem + 7.18vw, 11.868rem);
+    font-style: normal;
+    font-weight: 500;
+    letter-spacing: -10.318px;
+    line-height: 105%;
+    position: absolute;
+    white-space: nowrap;
+  }
+  canvas {
+    position: relative;
+    z-index: 1;
+  }
 }
 </style>

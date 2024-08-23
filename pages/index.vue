@@ -202,7 +202,7 @@
   height: clamp(16.995rem, 3.027rem + 16.36vw, 22.66rem);
   position: relative;
   z-index: 2;
-  margin: clamp(-3rem, 11.948rem + -17.51vw, -9.063rem) 0 0 -20px;
+  margin: clamp(-4.438rem, -4.592rem + 0.18vw, -4.375rem) 0 0 -20px;
   &__wrap {
     background: #fff;
     transform: rotate(3.167deg);
@@ -219,11 +219,11 @@
     animation: scroll-one 150s linear infinite;
     span {
       display: flex;
+      font-family: "Gilda Display";
       flex-shrink: 0;
       color: #1a3a97;
       font-size: clamp(4.063rem, 0.548rem + 4.12vw, 5.488rem);
-      font-style: italic;
-      font-weight: 300;
+      font-weight: 400;
       line-height: 105%;
       letter-spacing: -1.756px;
       flex-wrap: nowrap;
@@ -246,7 +246,7 @@
   background-repeat: no-repeat;
   z-index: 1;
   overflow: hidden;
-  margin-top: clamp(-11.75rem, -0.192rem + -13.54vw, -16.438rem);
+  margin-top: -270px;
   display: flex;
   align-items: center;
   &__content {
@@ -433,6 +433,11 @@
     br {
       display: none;
     }
+  }
+}
+@media (max-width: 1765px) {
+  .section-three {
+    margin-top: -210px;
   }
 }
 @media (max-width: 1366px) {

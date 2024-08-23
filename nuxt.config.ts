@@ -2,7 +2,6 @@ import vueCssModule from "vite-plugin-vue-css-module"
 
 export default defineNuxtConfig({
   compatibilityDate: "2024-04-03",
-  ssr: false,
   app: {
     head: {
       script: [
@@ -39,6 +38,9 @@ export default defineNuxtConfig({
     families: {
       Montserrat: {
         wght: [400, 500, 700],
+      },
+      "Gilda Display": {
+        wght: [400],
       },
     },
   },
