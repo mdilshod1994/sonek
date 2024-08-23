@@ -11,134 +11,98 @@ class App {
     this.gutter = { size: 4 }
     this.meshes = []
     this.grid = { rows: 5, cols: 12 }
-    this.width = experience.value.offsetWidth
+    this.width = window.innerWidth
     this.height = experience.value.offsetHeight
     this.mouse3D = new THREE.Vector2()
     this.raycaster = new THREE.Raycaster()
   }
-
   createScene() {
     this.scene = new THREE.Scene()
-
     this.renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true })
-    this.renderer.setSize(experience.value.offsetWidth, experience.value.offsetHeight)
-
+    this.renderer.setSize(window.innerWidth, experience.value.offsetHeight)
+    this.renderer.setPixelRatio(window.devicePixelRatio)
     this.renderer.shadowMap.enabled = true
     this.renderer.shadowMap.type = THREE.PCFSoftShadowMap
-
     nextTick(() => {
       experience.value.appendChild(this.renderer.domElement)
     })
   }
-
   createCamera() {
     this.camera = new THREE.PerspectiveCamera(
       37,
-      experience.value.offsetWidth / experience.value.offsetHeight,
+      window.innerWidth / experience.value.offsetHeight,
       1,
     )
     this.camera.position.set(0, 65, 0)
     this.camera.rotation.x = -1.57
-
     this.scene.add(this.camera)
   }
-
   addAmbientLight() {
-    const light = new THREE.AmbientLight("#ffffff", 1.5)
+    const light = new THREE.AmbientLight("#ffffff", 5)
     this.scene.add(light)
   }
   addDirectionalLight() {
-    const directionalLight = new THREE.DirectionalLight(0xffffff, 3)
-    // directionalLight.position.set(50, 100, 100)
+    const directionalLight = new THREE.DirectionalLight(0xffffff, 3) // Lowered intensity
     directionalLight.position.set(50, 100, 50)
     directionalLight.castShadow = true
+    directionalLight.shadow.mapSize.width = experience.value.offsetWidth
+    directionalLight.shadow.mapSize.height = experience.value.offsetHeight
 
-    // Shadow settings (optional but recommended for better shadow quality)
-    directionalLight.shadow.mapSize.width = this.width
-    directionalLight.shadow.mapSize.height = this.height
-    directionalLight.shadow.camera.near = 0.5
-    directionalLight.shadow.camera.far = 500
-    directionalLight.shadow.camera.left = -100
-    directionalLight.shadow.camera.right = 100
-    directionalLight.shadow.camera.top = 100
-    directionalLight.shadow.camera.bottom = -100
     this.scene.add(directionalLight)
   }
-
   addFloor() {
     const geometry = new THREE.PlaneGeometry(100, 100)
     const material = new THREE.ShadowMaterial({ opacity: 0.3 })
-
     this.floor = new THREE.Mesh(geometry, material)
     this.floor.position.y = 0
     this.floor.receiveShadow = true
     this.floor.rotateX(-Math.PI / 2)
-
     this.scene.add(this.floor)
   }
-
   getRandomGeometry() {
     return this.geometries[Math.floor(Math.random() * Math.floor(this.geometries.length))]
   }
-
   createGrid() {
     this.groupMesh = new THREE.Object3D()
-
     loader.load("/coin.glb", (gltf) => {
       const model = gltf.scene
-
       for (let row = 0; row < this.grid.rows; row++) {
         this.meshes[row] = []
-
         for (let col = 0; col < this.grid.cols; col++) {
           const mesh = model.clone()
-
           mesh.position.set(col + col * this.gutter.size, 0, row + row * this.gutter.size)
           mesh.rotation.x = -Math.PI / 2
           mesh.rotation.y = 0
           mesh.rotation.z = 0
-
           mesh.initialRotation = {
             x: mesh.rotation.x,
             y: mesh.rotation.y,
             z: mesh.rotation.z,
           }
-
           this.groupMesh.add(mesh)
           this.meshes[row][col] = mesh
         }
       }
-
       const centerX = (this.grid.cols - 1 + (this.grid.cols - 1) * this.gutter.size) * 0.5
       const centerZ = (this.grid.rows - 1 + (this.grid.rows - 1) * this.gutter.size) * 0.5
-
       this.groupMesh.position.set(-centerX, 0, -centerZ)
-
       this.scene.add(this.groupMesh)
     })
   }
-
   getTotalRows(col) {
     return col % 2 === 0 ? this.grid.cols : this.grid.cols - 1
   }
-
   getMesh(geometry, material) {
     const mesh = new THREE.Mesh(geometry, material)
-
     mesh.castShadow = true
     mesh.receiveShadow = true
-
     return mesh
   }
-
   draw() {
     this.raycaster.setFromCamera(this.mouse3D, this.camera)
-
     const intersects = this.raycaster.intersectObjects([this.floor])
-
     if (intersects.length) {
       const { x, z } = intersects[0].point
-
       for (let row = 0; row < this.grid.rows; row++) {
         for (let col = 0; col < this.grid.cols; col++) {
           const mesh = this.meshes[row][col]
@@ -148,20 +112,16 @@ class App {
             mesh.position.x + this.groupMesh.position.x,
             mesh.position.z + this.groupMesh.position.z,
           )
-
           const y = map(mouseDistance, 6, 0, 0, 10)
           TweenMax.to(mesh.position, 0.2, { y: y < 1 ? 1 : y })
-
           const scaleFactor = mesh.position.y / 5
           const scale = scaleFactor < 1 ? 1 : scaleFactor
-
           TweenMax.to(mesh.scale, 5, {
             ease: Expo.easeOut,
             x: scale,
             y: scale,
             z: scale,
           })
-
           TweenMax.to(mesh.rotation, 3, {
             ease: Expo.easeOut,
             x: map(mesh.position.y, -1, 1, radians(45), mesh.initialRotation.x),
@@ -172,63 +132,43 @@ class App {
       }
     }
   }
-
   init() {
     this.setup()
-
     this.createScene()
-
     this.createCamera()
-
     this.createGrid()
-
     this.addFloor()
-
     this.addAmbientLight()
-
     this.addDirectionalLight()
-
     this.animate()
-
     window.addEventListener("resize", this.onResize.bind(this))
-
     window.addEventListener("mousemove", this.onMouseMove.bind(this), false)
-
     window.addEventListener("touchmove", this.onTouchMove.bind(this), false)
-
     this.onMouseMove({ clientX: 0, clientY: 0 })
   }
-
   onMouseMove({ clientX, clientY }) {
-    this.mouse3D.x = (clientX / experience.value.offsetWidth) * 2 - 1
-    this.mouse3D.y = -(clientY / experience.value.offsetHeight) * 2 + 1
+    this.mouse3D.x = (clientX / this.width) * 2 - 1
+    this.mouse3D.y = -(clientY / this.height) * 2 + 1
   }
-
   onTouchMove(e) {
-    this.mouse3D.x = (e.touches[0].clientX / experience.value.offsetWidth) * 2 - 1
-    this.mouse3D.y = -(e.touches[0].clientY / experience.value.offsetHeight) * 2 + 1
+    this.mouse3D.x = (e.touches[0].clientX / this.width) * 2 - 1
+    this.mouse3D.y = -(e.touches[0].clientY / this.height) * 2 + 1
   }
-
   onResize() {
-    this.width = experience.value.offsetWidth
+    this.width = window.innerWidth
     this.height = experience.value.offsetHeight
-
-    this.camera.aspect = experience.value.offsetWidth / experience.value.offsetHeight
+    this.camera.aspect = this.width / this.height
     this.camera.updateProjectionMatrix()
-    this.renderer.setSize(experience.value.offsetWidth, experience.value.offsetHeight)
+    this.renderer.setSize(this.width, this.height)
   }
-
   animate() {
     setTimeout(() => {
       this.draw()
     }, 1000)
-
     this.renderer.render(this.scene, this.camera)
-
     requestAnimationFrame(this.animate.bind(this))
   }
 }
-
 onMounted(() => {
   const app = new App()
   app.init()
