@@ -2,7 +2,6 @@ import vueCssModule from "vite-plugin-vue-css-module"
 
 export default defineNuxtConfig({
   compatibilityDate: "2024-04-03",
-  ssr: false,
   app: {
     head: {
       script: [
